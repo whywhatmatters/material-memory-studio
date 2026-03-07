@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Border Crossing Sessions — Material Memory Studio</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZTW6LK4WY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9ZTW6LK4WY');
+  </script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2119949305436798');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2119949305436798&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f2ed; --bg-warm: #ede9e1; --text: #1e1c1a; --text-muted: #6b6560;
+      --accent: #8a9aaa; --rule: #d4cfc9;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Pretendard Variable', 'Pretendard', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background-color: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+
+    /* ─── NAV ─── */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3rem; background: rgba(245,242,237,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--rule); }
+    .nav-logo { font-family: var(--serif); font-size: 1rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); text-decoration: none; }
+    .nav-right { display: flex; align-items: center; gap: 2.5rem; }
+    .back-link { font-size: 0.68rem; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--text); }
+    .lang-toggle { display: flex; align-items: center; border-left: 1px solid var(--rule); padding-left: 2rem; }
+    .lang-btn { background: none; border: none; cursor: pointer; font-family: var(--sans); font-size: 0.68rem; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); padding: 0.1rem 0; transition: color 0.2s; line-height: 1; }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active { color: var(--text); font-weight: 400; }
+    .lang-divider { font-size: 0.6rem; color: var(--rule); margin: 0 0.5rem; }
+
+    /* ─── MAIN ─── */
+    main { max-width: 760px; margin: 0 auto; padding: 10rem 3rem 8rem; }
+
+    .page-eyebrow { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
+    .page-title { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300; line-height: 1.1; letter-spacing: -0.01em; color: var(--text); margin-bottom: 0.5rem; }
+    .page-title em { font-style: italic; }
+    .page-framework { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 3rem; }
+    .page-rule { width: 40px; height: 1px; background: var(--rule); margin-bottom: 3rem; }
+
+    .page-intro { font-family: var(--serif); font-size: 1.15rem; font-weight: 300; font-style: italic; line-height: 1.55; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 50ch; }
+    .page-body p { font-size: 0.92rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 58ch; }
+    .page-body p:last-child { margin-bottom: 0; }
+
+    .pilot-note { margin-top: 3rem; padding: 1.5rem 2rem; border-left: 2px solid var(--accent); background: var(--bg-warm); }
+    .pilot-note p { font-size: 0.82rem; color: var(--text-muted); font-style: italic; line-height: 1.7; margin: 0; }
+
+    .section-block { margin-top: 4.5rem; }
+    .section-heading { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
+
+    /* Detail rows */
+    .detail-rows { border-top: 1px solid var(--rule); }
+    .detail-row { display: flex; gap: 2rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); align-items: baseline; }
+    .detail-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); min-width: 120px; flex-shrink: 0; padding-top: 0.1rem; }
+    .detail-value { font-family: var(--serif); font-size: 1rem; font-weight: 400; color: var(--text); line-height: 1.4; }
+
+    /* Pricing */
+    .pricing-note { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .pricing-rows { border-top: 1px solid var(--rule); }
+    .pricing-row { display: flex; justify-content: space-between; align-items: baseline; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
+    .pricing-duration { font-family: var(--serif); font-size: 1.1rem; font-weight: 400; color: var(--text); }
+    .pricing-amount { font-family: var(--serif); font-size: 1rem; font-weight: 300; color: var(--text-muted); letter-spacing: 0.02em; }
+
+    /* Booking CTA */
+    .booking-block { margin-top: 4rem; }
+    .booking-block > p { font-size: 0.88rem; color: var(--text-muted); line-height: 1.85; max-width: 52ch; margin-bottom: 1.75rem; }
+    .btn-book { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bg); background: var(--text); text-decoration: none; padding: 0.85rem 1.75rem; transition: background 0.25s; }
+    .btn-book:hover { background: var(--accent); }
+    .booking-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 1rem; font-style: italic; line-height: 1.6; }
+
+    /* Session flow */
+    .flow-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .flow-col-label { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .flow-list { list-style: none; }
+    .flow-list li { display: flex; gap: 0.75rem; font-size: 0.83rem; line-height: 1.65; color: var(--text-muted); padding-bottom: 0.75rem; border-bottom: 1px solid var(--rule); margin-bottom: 0.75rem; align-items: baseline; }
+    .flow-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .flow-step { font-family: var(--serif); font-size: 0.8rem; color: var(--accent); flex-shrink: 0; min-width: 1.2rem; }
+    .flow-text { flex: 1; }
+    .flow-time { font-size: 0.7rem; color: var(--accent); letter-spacing: 0.05em; white-space: nowrap; flex-shrink: 0; padding-left: 0.5rem; }
+
+    /* Takeaway */
+    .takeaway-intro { font-size: 0.92rem; line-height: 1.9; color: var(--text-muted); max-width: 58ch; margin-bottom: 2.5rem; }
+    .takeaway-items { border-top: 1px solid var(--rule); }
+    .takeaway-item { padding: 1.75rem 0; border-bottom: 1px solid var(--rule); }
+    .takeaway-item-num { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+    .takeaway-item-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--text); margin-bottom: 0.6rem; line-height: 1.3; }
+    .takeaway-item-desc { font-size: 0.84rem; line-height: 1.85; color: var(--text-muted); max-width: 54ch; }
+
+    /* Reflection elements */
+    .reflection-block { margin-top: 2.5rem; }
+    .reflection-heading { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+    .reflection-tags { display: flex; flex-wrap: wrap; gap: 0.5rem 0.65rem; margin-bottom: 1.5rem; }
+    .reflection-tag { font-family: var(--serif); font-size: 0.88rem; font-style: italic; color: var(--text-muted); padding: 0.3rem 0.75rem; border: 1px solid var(--rule); }
+    .reflection-note { font-size: 0.82rem; line-height: 1.85; color: var(--text-muted); max-width: 56ch; }
+
+    /* Secondary instagram */
+    .instagram-secondary { margin-top: 4.5rem; padding-top: 3rem; border-top: 1px solid var(--rule); }
+    .instagram-secondary p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.7; max-width: 46ch; }
+    .btn-instagram { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text); padding-bottom: 0.25rem; transition: color 0.25s, border-color 0.25s; }
+    .btn-instagram:hover { color: var(--accent); border-color: var(--accent); }
+    .btn-instagram svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* Cross-link */
+    .cross-link-note { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--rule); }
+    .cross-link-note p { font-size: 0.78rem; color: var(--text-muted); line-height: 1.7; }
+    .subtle-link { color: var(--text-muted); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--rule); transition: color 0.2s, text-decoration-color 0.2s; }
+    .subtle-link:hover { color: var(--text); text-decoration-color: var(--text-muted); }
+
+    /* Footer */
+    footer { padding: 2.5rem 3rem; border-top: 1px solid var(--rule); background: var(--bg); }
+    .footer-inner { max-width: 760px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-name { font-family: var(--serif); font-size: 0.9rem; font-weight: 400; letter-spacing: 0.08em; color: var(--text); }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.2rem; }
+    .footer-host { font-size: 0.7rem; letter-spacing: 0.12em; color: var(--text-muted); }
+    .footer-year { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--accent); }
+
+    @media (max-width: 680px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-right { gap: 1.25rem; }
+      .lang-toggle { padding-left: 1rem; }
+      main { padding: 8rem 1.5rem 6rem; }
+      .flow-cols { grid-template-columns: 1fr; gap: 2.5rem; }
+      .detail-row { gap: 1rem; }
+      .detail-label { min-width: 90px; }
+      .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer-right { align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Material Memory Studio</a>
+    <div class="nav-right">
+      <a href="index.html" class="back-link" data-en="← Back" data-ko="← 돌아가기" data-track="bcs_back_to_home" data-location="bcs_detail_page">← Back</a>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+        <span class="lang-divider">·</span>
+        <button class="lang-btn" id="btn-ko" onclick="setLang('ko')">KR</button>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── TITLE BLOCK ── -->
+    <p class="page-eyebrow" data-en="Coaching — Material Memory Studio" data-ko="코칭 — Material Memory Studio">Coaching — Material Memory Studio</p>
+    <h1 class="page-title" data-en="Border Crossing<br/><em>Sessions</em>" data-ko="Border Crossing<br/><em>Sessions</em>">Border Crossing<br/><em>Sessions</em></h1>
+    <p class="page-framework">BORDER Framework™</p>
+    <div class="page-rule"></div>
+
+    <p class="page-intro"
+      data-en="Reflective sessions for those navigating thresholds between disciplines, places, selves, or seasons of life. A space to think slowly and speak without forced resolution."
+      data-ko="분야, 장소, 자아, 혹은 삶의 계절 사이에서 경계를 넘고 있는 이들을 위한 성찰적 세션. 천천히 생각하고, 쉬운 결론 없이 말할 수 있는 공간입니다.">Reflective sessions for those navigating thresholds between disciplines, places, selves, or seasons of life. A space to think slowly and speak without forced resolution.</p>
+
+    <!-- ── ABOUT ── -->
+    <div class="page-body">
+      <p data-en="Border Crossing Sessions are a distinct coaching format within Material Memory Studio. They are designed for people who find themselves in-between — between roles, identities, countries, disciplines, or chapters of life — and who need a space to hold that complexity without being moved toward a premature answer."
+        data-ko="Border Crossing Sessions는 Material Memory Studio의 독자적인 코칭 형식입니다. 역할, 정체성, 나라, 분야, 혹은 삶의 장(章) 사이 어딘가에 있는 사람들, 즉 이른 결론으로의 압박 없이 그 복잡함을 천천히 안고 갈 공간이 필요한 이들을 위해 만들어졌습니다.">Border Crossing Sessions are a distinct coaching format within Material Memory Studio. They are designed for people who find themselves in-between — between roles, identities, countries, disciplines, or chapters of life — and who need a space to hold that complexity without being moved toward a premature answer.</p>
+      <p data-en="Each session is grounded in the BORDER Framework™ — a reflective structure developed by Jay Lee. It is a held, unhurried conversation that moves at the pace of genuine inquiry. Not a consultation. Not a performance."
+        data-ko="각 세션은 Jay Lee가 개발한 성찰적 구조인 BORDER Framework™를 기반으로 합니다. 서두르지 않고 천천히 나누는 대화 — 상담도 아니고, 보여주기 위한 것도 아닙니다.">Each session is grounded in the BORDER Framework™ — a reflective structure developed by Jay Lee. It is a held, unhurried conversation that moves at the pace of genuine inquiry. Not a consultation. Not a performance.</p>
+      <p data-en="Rather than rushing toward clarity, the session helps identify the border you are actually standing in — psychological, professional, relational, geographic, or economic."
+        data-ko="이 세션은 성급히 명확함으로 나아가기보다, 지금 당신이 실제로 서 있는 경계가 무엇인지 — 심리적, 직업적, 관계적, 지리적, 혹은 경제적 경계인지를 함께 식별해보는 데서 시작합니다.">Rather than rushing toward clarity, the session helps identify the border you are actually standing in — psychological, professional, relational, geographic, or economic.</p>
+      <p data-en="Well-suited for artists, designers, researchers, founders, and professionals moving across disciplines, geographies, or life chapters, and who resist easy categorisation."
+        data-ko="분야, 지역, 혹은 삶의 장(章)을 가로지르며 이동 중인 예술가, 디자이너, 연구자, 파운더, 그리고 쉽게 범주화되기를 거부하는 전문가들에게 적합합니다.">Well-suited for artists, designers, researchers, founders, and professionals moving across disciplines, geographies, or life chapters, and who resist easy categorisation.</p>
+    </div>
+
+    <!-- ── PILOT NOTE ── -->
+    <div class="pilot-note">
+      <p data-en="Now open in a limited pilot format — first paid sessions are available on Saturdays, by appointment. This is a small, intentional opening, not a large-scale launch."
+        data-ko="현재 한정 파일럿 형식으로 운영 중입니다. 토요일 기준으로 소수의 첫 유료 세션 예약이 가능합니다. 크게 열린 출시가 아닌, 의도적으로 작게 시작하는 조용한 오프닝입니다.">Now open in a limited pilot format — first paid sessions are available on Saturdays, by appointment. This is a small, intentional opening, not a large-scale launch.</p>
+    </div>
+
+    <!-- ── SESSION DETAILS ── -->
+    <div class="section-block">
+      <p class="section-heading" data-en="Session Details" data-ko="세션 안내">Session Details</p>
+      <div class="detail-rows">
+        <div class="detail-row">
+          <span class="detail-label" data-en="Format" data-ko="형식">Format</span>
+          <span class="detail-value" data-en="60- or 90-minute one-on-one session" data-ko="60분 또는 90분 1:1 세션">60- or 90-minute one-on-one session</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label" data-en="Availability" data-ko="예약 가능 일정">Availability</span>
+          <span class="detail-value" data-en="Saturdays, by appointment" data-ko="토요일, 예약제">Saturdays, by appointment</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label" data-en="Location" data-ko="장소">Location</span>
+          <span class="detail-value" data-en="Hosted in-person at Material Memory Studio in Seoul" data-ko="서울 Material Memory Studio에서 진행되는 대면 세션">Hosted in-person at Material Memory Studio in Seoul</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label" data-en="Language" data-ko="진행 언어">Language</span>
+          <span class="detail-value" data-en="English or Korean" data-ko="영어 또는 한국어">English or Korean</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── SESSION OPTIONS / PRICING ── -->
+    <div class="section-block">
+      <p class="section-heading" data-en="Session Options" data-ko="세션 옵션">Session Options</p>
+      <p class="pricing-note" data-en="Introductory pilot pricing" data-ko="파일럿 오프닝 가격">Introductory pilot pricing</p>
+      <div class="pricing-rows">
+        <div class="pricing-row">
+          <span class="pricing-duration" data-en="60 minutes" data-ko="60분">60 minutes</span>
+          <span class="pricing-amount">USD 180</span>
+        </div>
+        <div class="pricing-row">
+          <span class="pricing-duration" data-en="90 minutes" data-ko="90분">90 minutes</span>
+          <span class="pricing-amount">USD 260</span>
+        </div>
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-muted); font-style:italic; line-height:1.8; margin-top:1.25rem;"
+        data-en="The 90-minute session allows more space for symbolic exploration and collaborative refinement of the reflection language."
+        data-ko="90분 세션은 상징 탐색과 리플렉션 언어를 함께 다듬는 과정에 보다 충분한 여유를 둡니다.">The 90-minute session allows more space for symbolic exploration and collaborative refinement of the reflection language.</p>
+    </div>
+    <div class="booking-block">
+      <p data-en="First sessions are available now. Select a Saturday that works for you on the booking page, where both session lengths are offered."
+        data-ko="첫 세션을 지금 예약하실 수 있습니다. 예약 페이지에서 원하시는 토요일 일정을 선택해 주세요. 60분과 90분 옵션이 모두 제공됩니다.">First sessions are available now. Select a Saturday that works for you on the booking page, where both session lengths are offered.</p>
+      <a href="https://cal.com/material-memory-studio-672ghg" target="_blank" rel="noopener noreferrer"
+        class="btn-book" data-track="bcs_booking" data-location="bcs_detail_page">
+        <span data-en="Book Border Crossing Sessions" data-ko="Border Crossing Sessions 예약하기">Book Border Crossing Sessions</span>
+      </a>
+      <p class="booking-sub"
+        data-en="The booking page includes both 60-minute and 90-minute session options."
+        data-ko="예약 페이지에서 60분 / 90분 세션 옵션을 선택하실 수 있습니다.">The booking page includes both 60-minute and 90-minute session options.</p>
+    </div>
+
+    <!-- ── SESSION FLOW ── -->
+    <div class="section-block">
+      <p class="section-heading" data-en="Session Flow" data-ko="세션 구성">Session Flow</p>
+      <div class="flow-cols">
+
+        <div class="flow-col flow-col-en">
+          <p class="flow-col-label">60 minutes</p>
+          <ol class="flow-list">
+            <li><span class="flow-step">1</span><span class="flow-text">Studio intro + intention setting</span><span class="flow-time">8 min</span></li>
+            <li><span class="flow-step">2</span><span class="flow-text">BORDER Framework introduction</span><span class="flow-time">10 min</span></li>
+            <li><span class="flow-step">3</span><span class="flow-text">Mini coaching</span><span class="flow-time">18 min</span></li>
+            <li><span class="flow-step">4</span><span class="flow-text">Symbol selection for portrait</span><span class="flow-time">7 min</span></li>
+            <li><span class="flow-step">5</span><span class="flow-text">Photoshoot</span><span class="flow-time">7 min</span></li>
+            <li><span class="flow-step">6</span><span class="flow-text">Wrap-up + reflection print + feedback</span><span class="flow-time">10 min</span></li>
+          </ol>
+        </div>
+
+        <div class="flow-col flow-col-en">
+          <p class="flow-col-label">90 minutes</p>
+          <ol class="flow-list">
+            <li><span class="flow-step">1</span><span class="flow-text">Studio intro + intention setting</span><span class="flow-time">10 min</span></li>
+            <li><span class="flow-step">2</span><span class="flow-text">BORDER Framework introduction</span><span class="flow-time">15 min</span></li>
+            <li><span class="flow-step">3</span><span class="flow-text">Coaching</span><span class="flow-time">25 min</span></li>
+            <li><span class="flow-step">4</span><span class="flow-text">Symbolic object / body-part exploration</span><span class="flow-time">15 min</span></li>
+            <li><span class="flow-step">5</span><span class="flow-text">Photoshoot</span><span class="flow-time">10 min</span></li>
+            <li><span class="flow-step">6</span><span class="flow-text">AI-assisted reflection statement creation</span><span class="flow-time">10 min</span></li>
+            <li><span class="flow-step">7</span><span class="flow-text">Reflection print + wrap-up</span><span class="flow-time">5 min</span></li>
+          </ol>
+        </div>
+
+        <div class="flow-col flow-col-ko" style="display:none;">
+          <p class="flow-col-label">60분</p>
+          <ol class="flow-list">
+            <li><span class="flow-step">1</span><span class="flow-text">스튜디오 소개 + 의도 설정</span><span class="flow-time">8분</span></li>
+            <li><span class="flow-step">2</span><span class="flow-text">BORDER Framework 소개</span><span class="flow-time">10분</span></li>
+            <li><span class="flow-step">3</span><span class="flow-text">미니 코칭</span><span class="flow-time">18분</span></li>
+            <li><span class="flow-step">4</span><span class="flow-text">포트레이트를 위한 상징 선택</span><span class="flow-time">7분</span></li>
+            <li><span class="flow-step">5</span><span class="flow-text">포토슛</span><span class="flow-time">7분</span></li>
+            <li><span class="flow-step">6</span><span class="flow-text">마무리 + 리플렉션 프린트 + 피드백</span><span class="flow-time">10분</span></li>
+          </ol>
+        </div>
+
+        <div class="flow-col flow-col-ko" style="display:none;">
+          <p class="flow-col-label">90분</p>
+          <ol class="flow-list">
+            <li><span class="flow-step">1</span><span class="flow-text">스튜디오 소개 + 의도 설정</span><span class="flow-time">10분</span></li>
+            <li><span class="flow-step">2</span><span class="flow-text">BORDER Framework 소개</span><span class="flow-time">15분</span></li>
+            <li><span class="flow-step">3</span><span class="flow-text">코칭</span><span class="flow-time">25분</span></li>
+            <li><span class="flow-step">4</span><span class="flow-text">상징적 사물 / 신체 부위 탐구</span><span class="flow-time">15분</span></li>
+            <li><span class="flow-step">5</span><span class="flow-text">포토슛</span><span class="flow-time">10분</span></li>
+            <li><span class="flow-step">6</span><span class="flow-text">AI 보조 리플렉션 스테이트먼트 작성</span><span class="flow-time">10분</span></li>
+            <li><span class="flow-step">7</span><span class="flow-text">리플렉션 프린트 + 마무리</span><span class="flow-time">5분</span></li>
+          </ol>
+        </div>
+
+      </div>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.85; margin-top:2rem; max-width:58ch; font-style:italic;"
+        data-en="For the 60-minute session, the reflection print is distilled in a more concise form at the close of the session. For the 90-minute session, the reflection language is developed more collaboratively, with time to refine the statement together before printing."
+        data-ko="60분 세션에서는 세션 말미에 보다 간결한 형태로 리플렉션 프린트를 정리해 마무리합니다. 90분 세션에서는 리플렉션의 언어를 함께 한 번 더 다듬는 시간이 포함되어, 출력 전 문장을 보다 정교하게 정제할 수 있습니다.">For the 60-minute session, the reflection print is distilled in a more concise form at the close of the session. For the 90-minute session, the reflection language is developed more collaboratively, with time to refine the statement together before printing.</p>
+    </div>
+    <div class="section-block">
+      <p class="section-heading" data-en="What You Take Away" data-ko="가져가시는 결과물">What You Take Away</p>
+
+      <p class="takeaway-intro"
+        data-en="At the close of the session, your words are distilled in-studio with AI as a supporting tool — not as the center of the experience, but as a way to help you leave with a more tangible reflection of your crossing."
+        data-ko="세션이 마무리되는 시점에, 대화 속에서 나온 언어는 스튜디오 안에서 AI를 보조 도구로 활용하여 정제됩니다. AI가 경험의 중심이 아니라, 당신이 오늘의 경계 넘기를 조금 더 선명하게 안고 갈 수 있도록 돕는 역할을 합니다.">At the close of the session, your words are distilled in-studio with AI as a supporting tool — not as the center of the experience, but as a way to help you leave with a more tangible reflection of your crossing.</p>
+      <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.8; margin-bottom:2rem;"
+        data-en="Both session formats include two takeaways, with the 90-minute session allowing more depth and development in the reflection print."
+        data-ko="두 가지 세션 모두 두 개의 결과물을 포함하며, 90분 세션에서는 리플렉션 프린트가 보다 깊이 있게 전개됩니다.">Both session formats include two takeaways, with the 90-minute session allowing more depth and development in the reflection print.</p>
+
+      <div class="takeaway-items">
+        <div class="takeaway-item">
+          <p class="takeaway-item-num" data-en="Output 01" data-ko="결과물 01">Output 01</p>
+          <p class="takeaway-item-title" data-en="Border Crossing Portrait" data-ko="Border Crossing 포트레이트">Border Crossing Portrait</p>
+          <p class="takeaway-item-desc"
+            data-en="A symbolic portrait centered on a body part or personal object that represents your current threshold — photographed in the studio and printed on site."
+            data-ko="당신의 현재 경계를 상징하는 신체 부위 또는 개인적인 사물을 중심으로 한 포트레이트. 스튜디오에서 촬영되고 현장에서 출력됩니다.">A symbolic portrait centered on a body part or personal object that represents your current threshold — photographed in the studio and printed on site.</p>
+        </div>
+        <div class="takeaway-item">
+          <p class="takeaway-item-num" data-en="Output 02" data-ko="결과물 02">Output 02</p>
+          <p class="takeaway-item-title" data-en="Border Crossing Reflection Print" data-ko="Border Crossing 리플렉션 프린트">Border Crossing Reflection Print</p>
+          <p class="takeaway-item-desc"
+            data-en="A personalized reflection print, shaped from the session conversation and refined in-studio with AI as a supporting tool. Depending on the session, this may include a one-line threshold statement, a brief reflection sheet, or a conceptual print combining image and language."
+            data-ko="세션의 대화에서 비롯되어 AI를 보조 도구로 활용해 스튜디오 안에서 정제된 개인화된 리플렉션 프린트. 세션에 따라 한 줄의 경계 스테이트먼트, 간결한 성찰 시트, 또는 이미지와 언어를 결합한 개념적 프린트로 완성됩니다.">A personalized reflection print, shaped from the session conversation and refined in-studio with AI as a supporting tool. Depending on the session, this may include a one-line threshold statement, a brief reflection sheet, or a conceptual print combining image and language.</p>
+        </div>
+      </div>
+
+      <!-- Reflection elements -->
+      <div class="reflection-block">
+        <p class="reflection-heading" data-en="Possible reflection elements" data-ko="가능한 리플렉션 요소">Possible reflection elements</p>
+        <div class="reflection-tags reflection-tags-en">
+          <span class="reflection-tag">Today's Border</span>
+          <span class="reflection-tag">What I'm Leaving</span>
+          <span class="reflection-tag">What I'm Entering</span>
+          <span class="reflection-tag">What Wants to Emerge</span>
+          <span class="reflection-tag">A Symbol from Today</span>
+          <span class="reflection-tag">Next Courageous Step</span>
+        </div>
+        <div class="reflection-tags reflection-tags-ko" style="display:none;">
+          <span class="reflection-tag">오늘의 경계</span>
+          <span class="reflection-tag">내가 떠나는 것</span>
+          <span class="reflection-tag">내가 들어서는 것</span>
+          <span class="reflection-tag">지금 피어나려는 것</span>
+          <span class="reflection-tag">오늘의 상징</span>
+          <span class="reflection-tag">다음의 용기 있는 한 걸음</span>
+        </div>
+        <p class="reflection-note reflection-note-en">In some sessions, this may also take the form of a one-line threshold statement — a distilled phrase that helps the participant remember the crossing in their own language.</p>
+        <p class="reflection-note reflection-note-ko" style="display:none;">어떤 세션에서는 이것이 한 줄의 경계 스테이트먼트로 완성되기도 합니다 — 참가자가 자신만의 언어로 오늘의 경계 넘기를 기억할 수 있도록 정제된 한 문장입니다.</p>
+      </div>
+    </div>
+
+    <!-- ── SECONDARY INSTAGRAM ── -->
+    <div class="instagram-secondary">
+      <p data-en="Studio updates and future availability are also shared on Instagram."
+        data-ko="스튜디오 업데이트와 향후 예약 가능 일정은 인스타그램에서도 공유됩니다.">Studio updates and future availability are also shared on Instagram.</p>
+      <a href="https://www.instagram.com/materialmemorystudio/" target="_blank" rel="noopener noreferrer"
+        class="btn-instagram" data-track="instagram" data-location="bcs_detail_page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+        </svg>
+        @materialmemorystudio
+      </a>
+    </div>
+
+    <!-- ── WHYWHATMATTERS CROSS-LINK ── -->
+    <div class="cross-link-note">
+      <p class="cross-link-en">For coaching essays, reflections, and newsletter: <a href="https://www.whywhatmatters.com/" target="_blank" rel="noopener noreferrer" class="subtle-link" data-track="bcs_coaching_site" data-location="bcs_detail_page">whywhatmatters.com</a></p>
+      <p class="cross-link-ko" style="display:none;">코칭 에세이, 성찰, 뉴스레터 보기: <a href="https://www.whywhatmatters.com/" target="_blank" rel="noopener noreferrer" class="subtle-link" data-track="bcs_coaching_site" data-location="bcs_detail_page">whywhatmatters.com</a></p>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-name">Material Memory Studio</span>
+      <div class="footer-right">
+        <span class="footer-host" data-en="Hosted by Jay Lee" data-ko="Jay Lee 운영">Hosted by Jay Lee</span>
+        <span class="footer-year">© 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function applyLang(lang) {
+      document.querySelectorAll('[data-en]').forEach(function(el) {
+        var text = el.getAttribute('data-' + lang);
+        if (text !== null) el.innerHTML = text;
+      });
+      // Flow columns
+      document.querySelectorAll('.flow-col-en').forEach(function(el) { el.style.display = lang === 'en' ? '' : 'none'; });
+      document.querySelectorAll('.flow-col-ko').forEach(function(el) { el.style.display = lang === 'ko' ? '' : 'none'; });
+      // Reflection tags and notes
+      document.querySelectorAll('.reflection-tags-en, .reflection-note-en').forEach(function(el) { el.style.display = lang === 'en' ? '' : 'none'; });
+      document.querySelectorAll('.reflection-tags-ko, .reflection-note-ko').forEach(function(el) { el.style.display = lang === 'ko' ? '' : 'none'; });
+      // Cross-link
+      var enCross = document.querySelector('.cross-link-en');
+      var koCross = document.querySelector('.cross-link-ko');
+      if (enCross) enCross.style.display = lang === 'en' ? '' : 'none';
+      if (koCross) koCross.style.display = lang === 'ko' ? '' : 'none';
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+      document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
+    }
+    function setLang(lang) {
+      try { localStorage.setItem('mms-lang', lang); } catch(e) {}
+      // Update URL query param without reloading
+      var url = new URL(window.location.href);
+      url.searchParams.set('lang', lang);
+      window.history.replaceState(null, '', url.toString());
+      // Rewrite internal cross-links to carry the param
+      updateCrossLinks(lang);
+      applyLang(lang);
+    }
+    function updateCrossLinks(lang) {
+      // Back link to index.html
+      document.querySelectorAll('a[href^="index.html"], a[href="./"], a[href="/"]').forEach(function(a) {
+        var u = new URL(a.href, window.location.href);
+        u.searchParams.set('lang', lang);
+        a.href = u.pathname + u.search;
+      });
+    }
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var qLang  = params.get('lang');
+      var saved  = 'en';
+      try { saved = localStorage.getItem('mms-lang') || 'en'; } catch(e) {}
+      var lang = (qLang === 'ko' || qLang === 'en') ? qLang : saved;
+      updateCrossLinks(lang);
+      applyLang(lang);
+    })();
+  </script>
+
+  <script>
+    // ─── OUTBOUND LINK TRACKING ──────────────────────────────────────────────
+    var GA4_EVENTS = {
+      instagram:          'instagram_click',
+      bcs_booking:        'bcs_booking_click',
+      bcs_coaching_site:  'bcs_coaching_site_click',
+      bcs_back_to_home:   'bcs_back_to_home_click'
+    };
+    var META_EVENTS = {
+      instagram:          'InstagramClick',
+      bcs_booking:        'BCSBookingClick',
+      bcs_coaching_site:  'BCSCoachingSiteClick',
+      bcs_back_to_home:   'BCSBackToHomeClick'
+    };
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[data-track]');
+      if (!link) return;
+      var track    = link.getAttribute('data-track');
+      var location = link.getAttribute('data-location') || '';
+      var url      = link.getAttribute('href') || '';
+      var ga4Event  = GA4_EVENTS[track];
+      var metaEvent = META_EVENTS[track];
+      if (!ga4Event) return;
+      var params = { link_url: url, link_location: location };
+      if (typeof gtag === 'function') gtag('event', ga4Event, params);
+      if (typeof fbq === 'function') fbq('trackCustom', metaEvent, params);
+    });
+  </script>
+
+</body>
+</html>

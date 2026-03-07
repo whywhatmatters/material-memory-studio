@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Material Memory Studio</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZTW6LK4WY"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9ZTW6LK4WY');
+  </script>
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2119949305436798');
+  fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=2119949305436798&ev=PageView&noscript=1"
+  /></noscript>
+  <!-- End Meta Pixel Code -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;1,9..40,300&family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #f5f2ed; --bg-warm: #ede9e1; --text: #1e1c1a; --text-muted: #6b6560;
+      --accent: #8a9aaa; --accent-light: #c8d0d8; --rule: #d4cfc9;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Pretendard Variable', 'Pretendard', 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background-color: var(--bg); color: var(--text); font-family: var(--sans); font-weight: 300; font-size: 16px; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 1.5rem 3rem; background: rgba(245,242,237,0.92); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    .nav-logo { font-family: var(--serif); font-size: 1rem; font-weight: 400; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text); text-decoration: none; }
+    .nav-right { display: flex; align-items: center; gap: 2.5rem; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-size: 0.72rem; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.25s ease; }
+    .nav-links a:hover { color: var(--text); }
+    .lang-toggle { display: flex; align-items: center; border-left: 1px solid var(--rule); padding-left: 2rem; }
+    .lang-btn { background: none; border: none; cursor: pointer; font-family: var(--sans); font-size: 0.68rem; font-weight: 300; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); padding: 0.1rem 0; transition: color 0.2s ease; line-height: 1; }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active { color: var(--text); font-weight: 400; }
+    .lang-divider { font-size: 0.6rem; color: var(--rule); margin: 0 0.5rem; line-height: 1; }
+    #hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 5rem; }
+    .hero-image-side { position: relative; overflow: hidden; }
+    .hero-image-bg { position: absolute; inset: 0; background-image: url('studio-hero.jpg'); background-size: cover; background-position: center center; }
+    .hero-image-bg::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to right, rgba(245,242,237,0.08) 0%, rgba(245,242,237,0.0) 100%); }
+    .hero-image-label { position: absolute; bottom: 2.5rem; left: 2.5rem; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(30,28,26,0.45); }
+    .hero-content-side { display: flex; flex-direction: column; justify-content: center; padding: 6rem 5rem; }
+    .hero-eyebrow { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; }
+    .hero-title { font-family: var(--serif); font-size: clamp(2.8rem, 4.5vw, 4.2rem); font-weight: 300; line-height: 1.08; letter-spacing: -0.01em; color: var(--text); margin-bottom: 1.75rem; }
+    .hero-title em { font-style: italic; }
+    .hero-subtitle { font-family: var(--serif); font-size: 1.2rem; font-weight: 300; font-style: italic; line-height: 1.5; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 32ch; }
+    .hero-body { font-size: 0.88rem; line-height: 1.8; color: var(--text-muted); max-width: 38ch; margin-bottom: 3rem; }
+    .btn-instagram { display: inline-flex; align-items: center; gap: 0.6rem; font-size: 0.72rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); text-decoration: none; border-bottom: 1px solid var(--text); padding-bottom: 0.25rem; transition: color 0.25s, border-color 0.25s; }
+    .btn-instagram:hover { color: var(--accent); border-color: var(--accent); }
+    .btn-instagram svg { width: 14px; height: 14px; flex-shrink: 0; }
+    section { padding: 7rem 3rem; }
+    .section-inner { max-width: 1160px; margin: 0 auto; }
+    .section-label { font-size: 0.65rem; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); margin-bottom: 2.5rem; }
+    #about { background: var(--bg-warm); border-top: 1px solid var(--rule); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
+    .about-heading { font-family: var(--serif); font-size: clamp(2rem, 3vw, 3rem); font-weight: 300; line-height: 1.15; color: var(--text); position: sticky; top: 8rem; }
+    .about-heading em { font-style: italic; color: var(--text-muted); }
+    .about-text p { font-size: 0.92rem; line-height: 1.9; color: var(--text-muted); margin-bottom: 1.5rem; max-width: 56ch; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-detail { display: flex; gap: 3rem; margin-top: 2.5rem; padding-top: 2.5rem; border-top: 1px solid var(--rule); }
+    .about-detail-item { display: flex; flex-direction: column; gap: 0.4rem; }
+    .about-detail-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); }
+    .about-detail-value { font-family: var(--serif); font-size: 1rem; font-weight: 400; color: var(--text); }
+    #offerings { background: var(--bg); border-top: 1px solid var(--rule); }
+    .offerings-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 4rem; }
+    .offerings-title { font-family: var(--serif); font-size: clamp(1.8rem, 2.8vw, 2.6rem); font-weight: 300; color: var(--text); }
+    .offerings-note { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em; }
+    .offerings-list { display: flex; flex-direction: column; }
+    .offering-item { display: grid; grid-template-columns: 4rem 1fr 1fr; gap: 2rem 4rem; padding: 3rem 0; border-bottom: 1px solid var(--rule); }
+    .offering-item:first-child { border-top: 1px solid var(--rule); }
+    .offering-num { font-family: var(--serif); font-size: 0.85rem; color: var(--accent); letter-spacing: 0.05em; padding-top: 0.2rem; }
+    .offering-name { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; color: var(--text); line-height: 1.2; margin-bottom: 0.5rem; }
+    .offering-desc { font-size: 0.85rem; line-height: 1.85; color: var(--text-muted); }
+    .offering-desc em { font-style: italic; }
+    .offering-meta { display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-end; text-align: right; }
+    .offering-tag { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-top: 0.2rem; }
+    #note { background: var(--text); border-top: 1px solid #333; }
+    #note .section-inner { display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .note-quote { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.4rem); font-weight: 300; font-style: italic; line-height: 1.4; color: #e8e3db; max-width: 28ch; margin-bottom: 2.5rem; }
+    .note-attribution { font-size: 0.68rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(200,193,183,0.6); }
+    #connect { background: var(--bg-warm); border-top: 1px solid var(--rule); }
+    .connect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .connect-heading { font-family: var(--serif); font-size: clamp(1.8rem, 2.8vw, 2.8rem); font-weight: 300; line-height: 1.2; color: var(--text); }
+    .connect-heading em { font-style: italic; color: var(--text-muted); }
+    .connect-right { display: flex; flex-direction: column; gap: 2rem; }
+    .connect-body { font-size: 0.88rem; line-height: 1.85; color: var(--text-muted); max-width: 46ch; }
+    .connect-instagram { display: inline-flex; align-items: center; gap: 0.75rem; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text); text-decoration: none; transition: color 0.25s; }
+    .connect-instagram:hover { color: var(--accent); }
+    .connect-instagram:hover svg { stroke: var(--accent); }
+    .connect-instagram svg { width: 18px; height: 18px; transition: stroke 0.25s; }
+    .connect-instagram-handle { font-family: var(--serif); font-size: 1rem; font-weight: 400; font-style: italic; color: var(--text-muted); margin-top: 0.25rem; }
+    footer { padding: 2.5rem 3rem; border-top: 1px solid var(--rule); background: var(--bg); }
+    .footer-inner { max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+    .footer-name { font-family: var(--serif); font-size: 0.9rem; font-weight: 400; letter-spacing: 0.08em; color: var(--text); }
+    .footer-right { display: flex; flex-direction: column; align-items: flex-end; gap: 0.2rem; }
+    .footer-host { font-size: 0.7rem; letter-spacing: 0.12em; color: var(--text-muted); }
+    .footer-year { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--accent); }
+    @media (max-width: 900px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { gap: 1.5rem; }
+      #hero { grid-template-columns: 1fr; grid-template-rows: 50vh auto; }
+      .hero-image-side { min-height: 50vh; }
+      .hero-content-side { padding: 4rem 2rem; }
+      section { padding: 5rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-heading { position: static; }
+      .offering-item { grid-template-columns: 3rem 1fr; grid-template-rows: auto auto; }
+      .offering-meta { grid-column: 2; grid-row: 2; align-items: flex-start; text-align: left; margin-top: 0.75rem; }
+      .connect-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .footer-inner { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer-right { align-items: center; }
+      .offerings-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .lang-toggle { padding-left: 1rem; }
+      .hero-title { font-size: 2.4rem; }
+      .hero-content-side { padding: 3rem 1.5rem; }
+    }
+    .coaching-link-note {
+      margin-top: 1.25rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .coaching-link-note a {
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--rule);
+      transition: color 0.2s, text-decoration-color 0.2s;
+    }
+    .coaching-link-note a:hover {
+      color: var(--text);
+      text-decoration-color: var(--text-muted);
+    }
+    /* ─── FOUR PILLARS ─── */
+    #pillars { background: var(--bg); border-top: 1px solid var(--rule); }
+    .pillars-intro { margin-bottom: 4rem; }
+    .pillars-intro-heading { font-family: var(--serif); font-size: clamp(1.6rem, 2.5vw, 2.2rem); font-weight: 300; line-height: 1.2; color: var(--text); margin-bottom: 1rem; max-width: 44ch; }
+    .pillars-intro-sub { font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; max-width: 52ch; }
+    .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+    .pillar-card { padding: 2.5rem 2rem 3rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .pillar-num { font-family: var(--serif); font-size: 0.75rem; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 1.5rem; display: block; }
+    .pillar-title { font-family: var(--serif); font-size: 1.2rem; font-weight: 400; color: var(--text); line-height: 1.2; margin-bottom: 0.9rem; }
+    .pillar-desc { font-size: 0.82rem; line-height: 1.85; color: var(--text-muted); }
+    @media (max-width: 900px) {
+      .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+    }
+    .coaching-link-ko { display: none; }
+    .artist-link-ko { display: none; }
+    .bcs-detail-link {
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 0.15rem;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .bcs-detail-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+    .hero-bcs-link {
+      font-size: 0.72rem; font-weight: 300; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .hero-bcs-link:hover { color: var(--text); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="nav-logo">Material Memory Studio</a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about" data-en="About" data-ko="소개">About</a></li>
+        <li><a href="#offerings" data-en="Offerings" data-ko="프로그램">Offerings</a></li>
+        <li><a href="#connect" data-en="Connect" data-ko="연결">Connect</a></li>
+      </ul>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+        <span class="lang-divider">·</span>
+        <button class="lang-btn" id="btn-ko" onclick="setLang('ko')">KR</button>
+      </div>
+    </div>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-image-side">
+      <div class="hero-image-bg"></div>
+      <span class="hero-image-label"
+        data-en="Seoul Studio — Spring 2026"
+        data-ko="서울 스튜디오 — 2026년 봄">Seoul Studio — Spring 2026</span>
+    </div>
+    <div class="hero-content-side">
+      <p class="hero-eyebrow"
+        data-en="Private Studio &amp; Salon"
+        data-ko="프라이빗 스튜디오 &amp; 살롱">Private Studio &amp; Salon</p>
+      <h1 class="hero-title">Material<br/><em>Memory</em><br/>Studio</h1>
+      <p class="hero-subtitle"
+        data-en="A space for art, tech/AI-informed coaching, and material research — for making, conversation, and border-crossing."
+        data-ko="예술, 테크/AI 기반 코칭, 소재 연구를 위한 공간 — 만들기, 대화, 경계 넘기를 위하여.">A space for art, tech/AI-informed coaching, and material research — for making, conversation, and border-crossing.</p>
+      <p class="hero-body"
+        data-en="A private studio and salon in Seoul for coaching, reflection, creative practice, research, prints, and experimental forms of dialogue."
+        data-ko="서울에 위치한 프라이빗 스튜디오이자 살롱. 코칭, 성찰, 창작, 리서치, 프린트, 그리고 실험적 대화를 위한 공간입니다.">A private studio and salon in Seoul for coaching, reflection, creative practice, research, prints, and experimental forms of dialogue.</p>
+      <a href="https://www.instagram.com/materialmemorystudio/" target="_blank" rel="noopener noreferrer" class="btn-instagram"
+        data-track="instagram" data-location="hero_button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+        </svg>
+        Instagram
+      </a>
+      <p class="hero-bcs-link-en" style="margin-top:1.25rem;">
+        <a href="border-crossing-sessions.html" class="hero-bcs-link" data-track="border_crossing_detail" data-location="hero_secondary_cta">Explore Border Crossing Sessions →</a>
+      </p>
+      <p class="hero-bcs-link-ko" style="margin-top:1.25rem; display:none;">
+        <a href="border-crossing-sessions.html" class="hero-bcs-link" data-track="border_crossing_detail" data-location="hero_secondary_cta">Border Crossing Sessions 자세히 보기 →</a>
+      </p>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div>
+          <p class="section-label"
+            data-en="About the Studio"
+            data-ko="스튜디오 소개">About the Studio</p>
+          <h2 class="about-heading"
+            data-en="Where materials,<br/>memory, and<br/><em>practice meet.</em>"
+            data-ko="소재와 기억,<br/>그리고 실천이<br/><em>만나는 곳.</em>">Where materials,<br/>memory, and<br/><em>practice meet.</em></h2>
+        </div>
+        <div class="about-text">
+          <p data-en="Material Memory Studio is a private research studio and salon exploring material culture, artistic practice, and border-crossing conversations across art, technology, and lived experience."
+            data-ko="Material Memory Studio는 물질문화, 예술적 실천, 그리고 예술·기술·삶의 경험을 가로지르는 border-crossing conversations를 탐구하는 프라이빗 리서치 스튜디오이자 살롱입니다.">Material Memory Studio is a private research studio and salon exploring material culture, artistic practice, and border-crossing conversations across art, technology, and lived experience.</p>
+          <p data-en="Hosted by Jay Lee and based in Seoul, it operates across artistic practice, coaching, and material research rather than within any single field. It welcomes artists, designers, founders, practitioners, researchers, and professionals drawn to careful thinking and the kinds of conversation that resist easy resolution."
+            data-ko="Jay Lee가 운영하며 서울을 기반으로, 단일 분야에 머물지 않고 예술적 실천, 코칭, 소재 연구를 가로지르며 활동합니다. 신중한 사유와 쉽게 결론 내릴 수 없는 대화에 이끌리는 예술가, 디자이너, 파운더, 실천가, 연구자, 전문가를 환영합니다.">Hosted by Jay Lee and based in Seoul, it operates across artistic practice, coaching, and material research rather than within any single field. It welcomes artists, designers, founders, practitioners, researchers, and professionals drawn to careful thinking and the kinds of conversation that resist easy resolution.</p>
+          <p data-en="Some formats are now open by appointment — including coaching and studio conversations — while others, such as material-led workshops and salon gatherings, continue to take shape. Material Memory Studio continues to open gradually, with selected formats now available by appointment."
+            data-ko="코칭과 스튜디오 대화를 비롯한 일부 형식은 현재 예약을 통해 이용 가능합니다. 소재 기반 워크숍과 살롱 모임 등 다른 형식들은 아직 준비 중입니다. Material Memory Studio는 천천히 열어가고 있으며, 일부 형식은 예약을 통해 만나보실 수 있습니다.">Some formats are now open by appointment — including coaching and studio conversations — while others, such as material-led workshops and salon gatherings, continue to take shape. Material Memory Studio continues to open gradually, with selected formats now available by appointment.</p>
+          <div class="about-detail">
+            <div class="about-detail-item">
+              <span class="about-detail-label" data-en="Location" data-ko="위치">Location</span>
+              <span class="about-detail-value" data-en="Seoul, Korea" data-ko="서울, 한국">Seoul, Korea</span>
+            </div>
+            <div class="about-detail-item">
+              <span class="about-detail-label" data-en="Format" data-ko="형태">Format</span>
+              <span class="about-detail-value" data-en="Private Studio" data-ko="프라이빗 스튜디오">Private Studio</span>
+            </div>
+            <div class="about-detail-item">
+              <span class="about-detail-label" data-en="Access" data-ko="방문">Access</span>
+              <span class="about-detail-value" data-en="By Appointment" data-ko="예약제">By Appointment</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUR PILLARS -->
+  <section id="pillars">
+    <div class="section-inner">
+      <div class="pillars-intro">
+        <p class="section-label" data-en="Four Pillars" data-ko="네 개의 기둥">Four Pillars</p>
+        <h2 class="pillars-intro-heading"
+          data-en="The studio is shaped by four intersecting pillars."
+          data-ko="이 스튜디오는 서로 교차하는 네 개의 기둥으로 이루어집니다.">The studio is shaped by four intersecting pillars.</h2>
+        <p class="pillars-intro-sub"
+          data-en="Together, these pillars shape the studio's research, practice, and evolving programs."
+          data-ko="이 네 개의 축은 스튜디오의 리서치, 실천, 그리고 변화하는 프로그램을 함께 이루어갑니다.">Together, these pillars shape the studio's research, practice, and evolving programs.</p>
+      </div>
+      <div class="pillars-grid">
+
+        <div class="pillar-card">
+          <span class="pillar-num">I</span>
+          <h3 class="pillar-title" data-en="Artist Studio" data-ko="아티스트 스튜디오">Artist Studio</h3>
+          <p class="pillar-desc"
+            data-en="Jay Lee's ongoing practice across materials, prints, research, and works."
+            data-ko="Jay Lee의 작업은 소재, 프린트, 리서치, 그리고 작품을 중심으로 지속적으로 확장됩니다.">Jay Lee's ongoing practice across materials, prints, research, and works.</p>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-num">II</span>
+          <h3 class="pillar-title" data-en="Salon" data-ko="살롱">Salon</h3>
+          <p class="pillar-desc"
+            data-en="A conversation platform for visiting speakers, gatherings, and talks."
+            data-ko="방문 연사, 모임, 토크를 위한 대화의 플랫폼입니다.">A conversation platform for visiting speakers, gatherings, and talks.</p>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-num">III</span>
+          <h3 class="pillar-title" data-en="Coaching" data-ko="코칭">Coaching</h3>
+          <p class="pillar-desc"
+            data-en="A distinctive coaching layer centered on Border Crossing Sessions and transitional inquiry."
+            data-ko="Border Crossing Sessions와 전환의 탐구를 중심으로 한, 이 공간만의 독특한 코칭 레이어입니다.">A distinctive coaching layer centered on Border Crossing Sessions and transitional inquiry.</p>
+        </div>
+
+        <div class="pillar-card">
+          <span class="pillar-num">IV</span>
+          <h3 class="pillar-title" data-en="Material Research" data-ko="소재 리서치">Material Research</h3>
+          <p class="pillar-desc"
+            data-en="A core research axis focused on material archive, biomaterial exploration, and regional materials."
+            data-ko="소재 아카이브, 바이오소재 탐구, 지역 기반 소재를 중심으로 한 핵심 리서치 축입니다.">A core research axis focused on material archive, biomaterial exploration, and regional materials.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="offerings">
+    <div class="section-inner">
+      <div class="offerings-header">
+        <h2 class="offerings-title"
+          data-en="Studio Offerings"
+          data-ko="스튜디오 프로그램">Studio Offerings</h2>
+        <span class="offerings-note"
+          data-en="All sessions by appointment"
+          data-ko="모든 세션은 예약제로 운영됩니다">All sessions by appointment</span>
+      </div>
+      <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:1rem; margin-top:-1rem;"
+        data-en="Current offerings reflect the studio's present appointment-based formats, beginning with coaching and conversation."
+        data-ko="현재의 프로그램은 코칭과 대화를 중심으로, 스튜디오가 지금 운영하는 예약 기반 형식들을 반영합니다.">Current offerings reflect the studio's present appointment-based formats, beginning with coaching and conversation.</p>
+      <p style="font-size:0.8rem; color:var(--text-muted); font-style:italic; margin-bottom:3rem;"
+        data-en="Currently available by appointment: Border Crossing Sessions, Studio Conversations, and selected original works and prints."
+        data-ko="현재 예약 가능: Border Crossing Sessions, 스튜디오 대화, 그리고 일부 오리지널 작품 및 프린트.">Currently available by appointment: Border Crossing Sessions, Studio Conversations, and selected original works and prints.</p>
+
+      <div class="offerings-list">
+
+        <div class="offering-item">
+          <span class="offering-num">01</span>
+          <div>
+            <h3 class="offering-name" data-en="Coaching" data-ko="코칭">Coaching</h3>
+            <p class="offering-desc"
+              data-en="Private coaching for people moving through transition, reinvention, leadership, and layered personal or professional change. A space for reflection, clarity, and courageous movement across identities, roles, geographies, and life chapters.<br/><br/><em>Including Border Crossing Sessions based on BORDER Framework™ — reflective sessions for those navigating thresholds between disciplines, places, selves, or seasons of life. A space to think slowly and speak without forced resolution.</em><br/><br/>In its studio-based Border Crossing Sessions format, coaching may also include symbolic portrait-making and an AI-assisted reflection print shaped in-studio."
+              data-ko="전환, 재발견, 리더십, 그리고 복합적인 삶의 변화를 경험하는 이들을 위한 프라이빗 코칭. 정체성, 역할, 지역, 삶의 장(章)을 가로지르는 성찰과 명료함, 그리고 용기 있는 움직임을 위한 공간입니다.<br/><br/><em>BORDER Framework™에 기반한 Border Crossing Sessions 포함 — 분야, 장소, 자아, 혹은 삶의 계절 사이에서 경계를 넘고 있는 이들을 위한 성찰적 세션. 천천히 생각하고, 쉬운 결론 없이 말할 수 있는 공간입니다.</em><br/><br/>스튜디오 기반의 Border Crossing Sessions 형식에서는 상징적 포트레이트 촬영과 스튜디오 안에서 AI를 보조 도구로 활용해 정리되는 리플렉션 프린트가 함께 포함될 수 있습니다.">Private coaching for people moving through transition, reinvention, leadership, and layered personal or professional change. A space for reflection, clarity, and courageous movement across identities, roles, geographies, and life chapters.<br/><br/><em>Including Border Crossing Sessions based on BORDER Framework™ — reflective sessions for those navigating thresholds between disciplines, places, selves, or seasons of life. A space to think slowly and speak without forced resolution.</em><br/><br/>In its studio-based Border Crossing Sessions format, coaching may also include symbolic portrait-making and an AI-assisted reflection print shaped in-studio.</p>
+            <p class="coaching-link-note coaching-link-en" style="margin-top:1.5rem;">For coaching essays, reflections, and newsletter: <a href="https://whywhatmatters.com" target="_blank" rel="noopener noreferrer" data-track="coaching_site" data-location="coaching_section">whywhatmatters.com</a></p>
+            <p class="coaching-link-note coaching-link-ko" style="margin-top:1.5rem;">코칭 에세이, 성찰, 뉴스레터: <a href="https://whywhatmatters.com" target="_blank" rel="noopener noreferrer" data-track="coaching_site" data-location="coaching_section">whywhatmatters.com</a></p>
+            <p class="bcs-link-en" style="margin-top:1.25rem;"><a href="border-crossing-sessions.html" class="bcs-detail-link" data-track="border_crossing_detail" data-location="coaching_offering_detail">Explore Border Crossing Sessions →</a></p>
+            <p class="bcs-link-ko" style="margin-top:1.25rem; display:none;"><a href="border-crossing-sessions.html" class="bcs-detail-link" data-track="border_crossing_detail" data-location="coaching_offering_detail">Border Crossing Sessions 자세히 보기 →</a></p>
+          </div>
+          <div class="offering-meta">
+            <span class="offering-tag" data-en="Limited pilot booking" data-ko="파일럿 예약 가능">Limited pilot booking</span>
+          </div>
+        </div>
+
+        <div class="offering-item">
+          <span class="offering-num">02</span>
+          <div>
+            <h3 class="offering-name"
+              data-en="Original Artworks &amp; Art Prints"
+              data-ko="오리지널 아트워크 &amp; 아트 프린트">Original Artworks &amp; Art Prints</h3>
+            <p class="offering-desc"
+              data-en="Original artworks and photographic prints from Jay Lee's ongoing studio practice and nomadic archive. Spanning painting, sculpture, glass, ceramics, bioplastics, beeswax, alternative photography, and print-based works, each piece explores how materials hold memory across time, place, and transformation."
+              data-ko="Jay Lee의 지속적인 스튜디오 작업과 노마딕 아카이브에서 비롯된 오리지널 아트워크와 사진 기반 프린트. 페인팅, 조각, 유리, 세라믹, 바이오플라스틱, 비즈왁스, 얼터너티브 포토그래피, 프린트 기반 작업에 이르기까지, 각각의 작업은 소재가 시간과 장소, 그리고 변형 속에서 어떻게 기억을 담아내는지를 탐구합니다.">Original artworks and photographic prints from Jay Lee's ongoing studio practice and nomadic archive. Spanning painting, sculpture, glass, ceramics, bioplastics, beeswax, alternative photography, and print-based works, each piece explores how materials hold memory across time, place, and transformation.</p>
+            <p class="coaching-link-note artist-link-en">For selected works and extended archive: <a href="https://www.jayartmaking.com/works" target="_blank" rel="noopener noreferrer" data-track="artist_site" data-location="original_works_section">jayartmaking.com/works</a></p>
+            <p class="coaching-link-note artist-link-ko">선별된 작업과 확장된 아카이브 보기: <a href="https://www.jayartmaking.com/works" target="_blank" rel="noopener noreferrer" data-track="artist_site" data-location="original_works_section">jayartmaking.com/works</a></p>
+          </div>
+          <div class="offering-meta">
+            <span class="offering-tag"
+              data-en="Original works &amp; limited editions"
+              data-ko="오리지널 작품 및 한정 에디션">Original works &amp; limited editions</span>
+          </div>
+        </div>
+
+        <div class="offering-item">
+          <span class="offering-num">03</span>
+          <div>
+            <h3 class="offering-name" data-en="Studio Conversations" data-ko="스튜디오 대화">Studio Conversations</h3>
+            <p class="offering-desc"
+              data-en="Intimate, appointment-based exchanges in the studio. Not a consultation, but a carefully held dialogue for coaches, artists, designers, researchers, practitioners, and professionals who resist easy categorization."
+              data-ko="스튜디오에서 이루어지는 친밀하고 예약 기반의 만남. 상담이 아닌, 코치·예술가·디자이너·연구자·실천가·그리고 쉬운 범주화를 거부하는 전문가들을 위한 섬세하게 열린 대화입니다.">Intimate, appointment-based exchanges in the studio. Not a consultation, but a carefully held dialogue for coaches, artists, designers, researchers, practitioners, and professionals who resist easy categorization.</p>
+          </div>
+          <div class="offering-meta">
+            <span class="offering-tag" data-en="Appointment only" data-ko="예약 전용">Appointment only</span>
+          </div>
+        </div>
+
+        <div class="offering-item">
+          <span class="offering-num">04</span>
+          <div>
+            <h3 class="offering-name" data-en="Material Research Archive" data-ko="소재 리서치 아카이브">Material Research Archive</h3>
+            <p class="offering-desc"
+              data-en="An evolving archive of material references, regional and historical sources, biomaterial experiments, pigments, binders, found forms, and artistic research. Part studio library, part working index — shaped by questions of memory, time, transformation, and place."
+              data-ko="소재에 대한 레퍼런스, 지역 및 역사적 자료, 바이오소재 실험, 안료와 바인더, 발견된 형태, 그리고 예술적 리서치가 축적되는 살아있는 아카이브. 스튜디오 라이브러리이자 작업 인덱스로서, 기억·시간·변형·장소에 대한 질문들로 이루어집니다.">An evolving archive of material references, regional and historical sources, biomaterial experiments, pigments, binders, found forms, and artistic research. Part studio library, part working index — shaped by questions of memory, time, transformation, and place.</p>
+          </div>
+          <div class="offering-meta">
+            <span class="offering-tag" data-en="In development" data-ko="준비 중">In development</span>
+          </div>
+        </div>
+
+        <div class="offering-item">
+          <span class="offering-num">05</span>
+          <div>
+            <h3 class="offering-name" data-en="Material-led Art Workshops" data-ko="소재 기반 아트 워크숍">Material-led Art Workshops</h3>
+            <p class="offering-desc"
+              data-en="Workshops led by Jay Lee through evolving collections of natural, historical, and locally hand-selected materials gathered across different regions. Rooted in processes of making, cooking, transformation, and experimentation, these workshops explore how materials carry memory, place, and time."
+              data-ko="Jay Lee가 여러 지역에서 수집해온 자연 소재, 역사적 소재, 그리고 지역적으로 직접 선별한 소재의 컬렉션을 바탕으로 진행하는 워크숍입니다. 만들기, 조리하기, 변형, 실험의 과정을 통해, 소재가 기억과 장소, 시간성을 어떻게 품고 있는지를 함께 탐구합니다.">Workshops led by Jay Lee through evolving collections of natural, historical, and locally hand-selected materials gathered across different regions. Rooted in processes of making, cooking, transformation, and experimentation, these workshops explore how materials carry memory, place, and time.</p>
+          </div>
+          <div class="offering-meta">
+            <span class="offering-tag"
+              data-en="Upcoming, starting in April"
+              data-ko="4월부터 시작 예정">Upcoming, starting in April</span>
+          </div>
+        </div>
+
+        <div class="offering-item">
+          <span class="offering-num">06</span>
+          <div>
+            <h3 class="offering-name" data-en="Future Salons &amp; Guest Hosts" data-ko="살롱 &amp; 게스트 호스트">Future Salons &amp; Guest Hosts</h3>
+            <p class="offering-desc"
+              data-en="Special workshops, talks, gatherings, and events developed with an international network of professional coaches, artists, curators, designers, and AI/tech industry experts. A space for shared inquiry, cross-disciplinary exchange, and new forms of conversation."
+              data-ko="전문 코치, 예술가, 큐레이터, 디자이너, AI/테크 전문가들로 구성된 국제 네트워크와 함께 만들어가는 워크숍, 토크, 모임, 이벤트. 공동의 탐구, 분야를 초월한 교류, 새로운 형태의 대화를 위한 공간입니다.">Special workshops, talks, gatherings, and events developed with an international network of professional coaches, artists, curators, designers, and AI/tech industry experts. A space for shared inquiry, cross-disciplinary exchange, and new forms of conversation.</p>
+          </div>
+          <div class="offering-meta">
+            <span class="offering-tag"
+              data-en="Upcoming, starting in May"
+              data-ko="5월부터 시작 예정">Upcoming, starting in May</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="note">
+    <div class="section-inner">
+      <blockquote class="note-quote"
+        data-en='"Material Memory Studio is a space for making, conversation, and border-crossing — where art, coaching, and technology meet. Open by appointment."'
+        data-ko='"Material Memory Studio는 만들기, 대화, 경계 넘기를 위한 공간입니다 — 예술, 코칭, 기술이 만나는 곳. 예약을 통해 열려 있습니다."'>
+        "Material Memory Studio is a space for making, conversation, and border-crossing — where art, coaching, and technology meet. Open by appointment."
+      </blockquote>
+      <p class="note-attribution"
+        data-en="Seoul — Spring 2026"
+        data-ko="서울 — 2026년 봄">Seoul — Spring 2026</p>
+    </div>
+  </section>
+
+  <section id="connect">
+    <div class="section-inner">
+      <div class="connect-grid">
+        <div>
+          <p class="section-label" data-en="Connect" data-ko="연결">Connect</p>
+          <h2 class="connect-heading"
+            data-en="Follow the studio<br/><em>as it unfolds.</em>"
+            data-ko="스튜디오가 열어가는<br/><em>과정을 함께하세요.</em>">Follow the studio<br/><em>as it unfolds.</em></h2>
+        </div>
+        <div class="connect-right">
+          <p class="connect-body"
+            data-en="Follow the studio's ongoing process, selected works and prints, and future program announcements on Instagram. Studio updates, appointments, and collaboration opportunities are often shared there first."
+            data-ko="인스타그램에서 스튜디오의 진행 과정, 일부 작품과 프린트, 그리고 향후 프로그램 소식을 함께 따라오세요. 스튜디오 업데이트, 예약 정보, 협업 기회는 그곳에서 가장 먼저 공유되는 경우가 많습니다.">Follow the studio's ongoing process, selected works and prints, and future program announcements on Instagram. Studio updates, appointments, and collaboration opportunities are often shared there first.</p>
+          <div>
+            <a href="https://www.instagram.com/materialmemorystudio/" target="_blank" rel="noopener noreferrer" class="connect-instagram"
+              data-track="instagram" data-location="connect_label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+              </svg>
+              Instagram
+            </a>
+            <p class="connect-instagram-handle">
+              <a href="https://www.instagram.com/materialmemorystudio/" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;"
+                data-track="instagram" data-location="connect_handle">@materialmemorystudio</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-name">Material Memory Studio</span>
+      <div class="footer-right">
+        <span class="footer-host"
+          data-en="Hosted by Jay Lee"
+          data-ko="Jay Lee 운영">Hosted by Jay Lee</span>
+        <span class="footer-year">© 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function applyLang(lang) {
+      document.querySelectorAll('[data-en]').forEach(function(el) {
+        var text = el.getAttribute('data-' + lang);
+        if (text !== null) el.innerHTML = text;
+      });
+      // Coaching link note — handled as separate elements, not data attributes
+      var enNote = document.querySelector('.coaching-link-en');
+      var koNote = document.querySelector('.coaching-link-ko');
+      if (enNote) enNote.style.display = lang === 'en' ? '' : 'none';
+      if (koNote) koNote.style.display = lang === 'ko' ? '' : 'none';
+      var enArtist = document.querySelector('.artist-link-en');
+      var koArtist = document.querySelector('.artist-link-ko');
+      if (enArtist) enArtist.style.display = lang === 'en' ? '' : 'none';
+      if (koArtist) koArtist.style.display = lang === 'ko' ? '' : 'none';
+      var enBcs = document.querySelector('.bcs-link-en');
+      var koBcs = document.querySelector('.bcs-link-ko');
+      if (enBcs) enBcs.style.display = lang === 'en' ? '' : 'none';
+      if (koBcs) koBcs.style.display = lang === 'ko' ? '' : 'none';
+      var enHeroBcs = document.querySelector('.hero-bcs-link-en');
+      var koHeroBcs = document.querySelector('.hero-bcs-link-ko');
+      if (enHeroBcs) enHeroBcs.style.display = lang === 'en' ? '' : 'none';
+      if (koHeroBcs) koHeroBcs.style.display = lang === 'ko' ? '' : 'none';
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+      document.getElementById('btn-ko').classList.toggle('active', lang === 'ko');
+      document.documentElement.lang = lang === 'ko' ? 'ko' : 'en';
+    }
+    function setLang(lang) {
+      try { localStorage.setItem('mms-lang', lang); } catch(e) {}
+      // Update URL query param without reloading
+      var url = new URL(window.location.href);
+      url.searchParams.set('lang', lang);
+      window.history.replaceState(null, '', url.toString());
+      // Rewrite internal cross-links to carry the param
+      updateCrossLinks(lang);
+      applyLang(lang);
+    }
+    function updateCrossLinks(lang) {
+      // Any internal link pointing to border-crossing-sessions.html
+      document.querySelectorAll('a[href^="border-crossing-sessions.html"]').forEach(function(a) {
+        var u = new URL(a.href, window.location.href);
+        u.searchParams.set('lang', lang);
+        a.href = u.pathname + u.search;
+      });
+    }
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var qLang  = params.get('lang');
+      var saved  = 'en';
+      try { saved = localStorage.getItem('mms-lang') || 'en'; } catch(e) {}
+      var lang = (qLang === 'ko' || qLang === 'en') ? qLang : saved;
+      updateCrossLinks(lang);
+      applyLang(lang);
+    })();
+  </script>
+  <script>
+    // ─── OUTBOUND LINK TRACKING ──────────────────────────────────────────────
+    // Sends events to GA4 (gtag) and Meta Pixel (fbq) on tracked link clicks.
+    // Links are identified by data-track and data-location attributes.
+
+    var GA4_EVENTS = {
+      instagram:             'instagram_click',
+      coaching_site:         'coaching_site_click',
+      artist_site:           'artist_site_click',
+      border_crossing_detail: 'border_crossing_detail_click'
+    };
+    var META_EVENTS = {
+      instagram:             'InstagramClick',
+      coaching_site:         'CoachingSiteClick',
+      artist_site:           'ArtistSiteClick',
+      border_crossing_detail: 'BorderCrossingDetailClick'
+    };
+
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[data-track]');
+      if (!link) return;
+
+      var track    = link.getAttribute('data-track');
+      var location = link.getAttribute('data-location') || '';
+      var url      = link.getAttribute('href') || '';
+
+      var ga4Event  = GA4_EVENTS[track];
+      var metaEvent = META_EVENTS[track];
+      if (!ga4Event) return;
+
+      var params = { link_url: url, link_location: location };
+
+      // GA4
+      if (typeof gtag === 'function') {
+        gtag('event', ga4Event, params);
+      }
+      // Meta Pixel
+      if (typeof fbq === 'function') {
+        fbq('trackCustom', metaEvent, params);
+      }
+    });
+  </script>
+
+</body>
+</html>
