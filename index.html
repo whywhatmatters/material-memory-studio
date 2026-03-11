@@ -573,7 +573,7 @@
       var qLang  = params.get('lang');
       var saved  = 'en';
       try { saved = localStorage.getItem('mms-lang') || 'en'; } catch(e) {}
-      var lang = (qLang === 'ko' || qLang === 'en') ? qLang : saved;
+      var lang = (qLang === 'ko' || qLang === 'en') ? qLang : 'en';
       updateCrossLinks(lang);
       applyLang(lang);
     })();
