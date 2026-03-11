@@ -3,7 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Border Crossing Sessions — Material Memory Studio</title>
+  <title>Border Crossing Sessions | AI-Assisted Reflective Coaching in Seoul</title>
+  <meta name="description" content="Border Crossing Sessions are 1:1 reflective coaching sessions in Seoul for artists, founders, and professionals navigating transition, identity, place, and life change." />
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link rel="apple-touch-icon" href="/assets/images/favicon.png" />
+  <link rel="canonical" href="/border-crossing-sessions" />
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/border-crossing-sessions" />
+  <meta property="og:title" content="Border Crossing Sessions | AI-Assisted Reflective Coaching in Seoul" />
+  <meta property="og:description" content="Border Crossing Sessions are 1:1 reflective coaching sessions in Seoul for artists, founders, and professionals navigating transition, identity, place, and life change." />
+  <meta property="og:image" content="/assets/images/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Border Crossing Sessions | AI-Assisted Reflective Coaching in Seoul" />
+  <meta name="twitter:description" content="Border Crossing Sessions are 1:1 reflective coaching sessions in Seoul for artists, founders, and professionals navigating transition, identity, place, and life change." />
+  <meta name="twitter:image" content="/assets/images/og-image.png" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZTW6LK4WY"></script>
   <script>
@@ -157,9 +171,9 @@
 <body>
 
   <nav>
-    <a href="index.html" class="nav-logo">Material Memory Studio</a>
+    <a href="/" class="nav-logo">Material Memory Studio</a>
     <div class="nav-right">
-      <a href="index.html" class="back-link" data-en="← Back" data-ko="← 돌아가기" data-track="bcs_back_to_home" data-location="bcs_detail_page">← Back</a>
+      <a href="/" class="back-link" data-en="← Back" data-ko="← 돌아가기" data-track="bcs_back_to_home" data-location="bcs_detail_page">← Back</a>
       <div class="lang-toggle">
         <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
         <span class="lang-divider">·</span>
@@ -427,7 +441,7 @@
       applyLang(lang);
     }
     function updateCrossLinks(lang) {
-      // Back link to index.html
+      // Back link to home
       document.querySelectorAll('a[href^="index.html"], a[href="./"], a[href="/"]').forEach(function(a) {
         var u = new URL(a.href, window.location.href);
         u.searchParams.set('lang', lang);

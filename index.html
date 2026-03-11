@@ -3,7 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Material Memory Studio</title>
+  <title>Material Memory Studio | Art, Coaching &amp; Material Research in Seoul</title>
+  <meta name="description" content="Material Memory Studio is a private Seoul studio for art, coaching, and material research—offering Border Crossing Sessions, studio conversations, prints, and evolving salon programs by appointment." />
+  <link rel="icon" type="image/png" href="assets/images/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/images/favicon.png" />
+  <link rel="canonical" href="/" />
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="/" />
+  <meta property="og:title" content="Material Memory Studio | Art, Coaching &amp; Material Research in Seoul" />
+  <meta property="og:description" content="Material Memory Studio is a private Seoul studio for art, coaching, and material research—offering Border Crossing Sessions, studio conversations, prints, and evolving salon programs by appointment." />
+  <meta property="og:image" content="assets/images/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Material Memory Studio | Art, Coaching &amp; Material Research in Seoul" />
+  <meta name="twitter:description" content="Material Memory Studio is a private Seoul studio for art, coaching, and material research—offering Border Crossing Sessions, studio conversations, prints, and evolving salon programs by appointment." />
+  <meta name="twitter:image" content="assets/images/og-image.png" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZTW6LK4WY"></script>
   <script>
@@ -241,10 +255,10 @@
         Instagram
       </a>
       <p class="hero-bcs-link-en" style="margin-top:1.25rem;">
-        <a href="border-crossing-sessions.html" class="hero-bcs-link" data-track="border_crossing_detail" data-location="hero_secondary_cta">Explore Border Crossing Sessions →</a>
+        <a href="/border-crossing-sessions" class="hero-bcs-link" data-track="border_crossing_detail" data-location="hero_secondary_cta">Explore Border Crossing Sessions →</a>
       </p>
       <p class="hero-bcs-link-ko" style="margin-top:1.25rem; display:none;">
-        <a href="border-crossing-sessions.html" class="hero-bcs-link" data-track="border_crossing_detail" data-location="hero_secondary_cta">Border Crossing Sessions 자세히 보기 →</a>
+        <a href="/border-crossing-sessions" class="hero-bcs-link" data-track="border_crossing_detail" data-location="hero_secondary_cta">Border Crossing Sessions 자세히 보기 →</a>
       </p>
     </div>
   </section>
@@ -364,8 +378,8 @@
               data-ko="전환, 재발견, 리더십, 그리고 복합적인 삶의 변화를 경험하는 이들을 위한 프라이빗 코칭. 정체성, 역할, 지역, 삶의 장(章)을 가로지르는 성찰과 명료함, 그리고 용기 있는 움직임을 위한 공간입니다.<br/><br/><em>BORDER Framework™에 기반한 Border Crossing Sessions 포함 — 분야, 장소, 자아, 혹은 삶의 계절 사이에서 경계를 넘고 있는 이들을 위한 성찰적 세션. 천천히 생각하고, 쉬운 결론 없이 말할 수 있는 공간입니다.</em><br/><br/>스튜디오 기반의 Border Crossing Sessions 형식에서는 상징적 포트레이트 촬영과 스튜디오 안에서 AI를 보조 도구로 활용해 정리되는 리플렉션 프린트가 함께 포함될 수 있습니다.">Private coaching for people moving through transition, reinvention, leadership, and layered personal or professional change. A space for reflection, clarity, and courageous movement across identities, roles, geographies, and life chapters.<br/><br/><em>Including Border Crossing Sessions based on BORDER Framework™ — reflective sessions for those navigating thresholds between disciplines, places, selves, or seasons of life. A space to think slowly and speak without forced resolution.</em><br/><br/>In its studio-based Border Crossing Sessions format, coaching may also include symbolic portrait-making and an AI-assisted reflection print shaped in-studio.</p>
             <p class="coaching-link-note coaching-link-en" style="margin-top:1.5rem;">For coaching essays, reflections, and newsletter: <a href="https://whywhatmatters.com" target="_blank" rel="noopener noreferrer" data-track="coaching_site" data-location="coaching_section">whywhatmatters.com</a></p>
             <p class="coaching-link-note coaching-link-ko" style="margin-top:1.5rem;">코칭 에세이, 성찰, 뉴스레터: <a href="https://whywhatmatters.com" target="_blank" rel="noopener noreferrer" data-track="coaching_site" data-location="coaching_section">whywhatmatters.com</a></p>
-            <p class="bcs-link-en" style="margin-top:1.25rem;"><a href="border-crossing-sessions.html" class="bcs-detail-link" data-track="border_crossing_detail" data-location="coaching_offering_detail">Explore Border Crossing Sessions →</a></p>
-            <p class="bcs-link-ko" style="margin-top:1.25rem; display:none;"><a href="border-crossing-sessions.html" class="bcs-detail-link" data-track="border_crossing_detail" data-location="coaching_offering_detail">Border Crossing Sessions 자세히 보기 →</a></p>
+            <p class="bcs-link-en" style="margin-top:1.25rem;"><a href="/border-crossing-sessions" class="bcs-detail-link" data-track="border_crossing_detail" data-location="coaching_offering_detail">Explore Border Crossing Sessions →</a></p>
+            <p class="bcs-link-ko" style="margin-top:1.25rem; display:none;"><a href="/border-crossing-sessions" class="bcs-detail-link" data-track="border_crossing_detail" data-location="coaching_offering_detail">Border Crossing Sessions 자세히 보기 →</a></p>
           </div>
           <div class="offering-meta">
             <span class="offering-tag" data-en="Limited pilot booking" data-ko="파일럿 예약 가능">Limited pilot booking</span>
@@ -547,8 +561,8 @@
       applyLang(lang);
     }
     function updateCrossLinks(lang) {
-      // Any internal link pointing to border-crossing-sessions.html
-      document.querySelectorAll('a[href^="border-crossing-sessions.html"]').forEach(function(a) {
+      // Internal links to Border Crossing Sessions page
+      document.querySelectorAll('a[href^="/border-crossing-sessions"]').forEach(function(a) {
         var u = new URL(a.href, window.location.href);
         u.searchParams.set('lang', lang);
         a.href = u.pathname + u.search;

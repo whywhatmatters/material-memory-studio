@@ -1,0 +1,6 @@
+{
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/border-crossing-sessions.html", "destination": "/border-crossing-sessions", "permanent": true }
+  ]
+}
